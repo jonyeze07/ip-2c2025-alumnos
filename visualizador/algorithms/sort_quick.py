@@ -1,24 +1,56 @@
-# Template genérico — SKELETON
-# Contrato: init(vals), step() -> {"a": int, "b": int, "swap": bool, "done": bool}
-
 items = []
 n = 0
-# Agregá acá tus punteros/estado, p.ej.:
-# i = 0; j = 0; fase = "x"; stack = []
-
+i = 0
+j = 0
+pivot = items[n-1]
+recorer = items[:]
+menores = []
+pivot_lista = []
+mayores = []
 def init(vals):
-    global items, n
+    global items, n, i, j, pivot, recorer, menores, mayores, pivot_lista
     items = list(vals)
     n = len(items)
-    # TODO: inicializar punteros/estado
-
-def step():
+    i = 0
+    pivot = items[n-1]
+    j = 0 
+    recorer = items[:]
     menores = []
-    pivot = []
+    pivot_lista = []
     mayores = []
-    # TODO: implementar UN micro-paso de tu algoritmo y devolver el dict.
-    # Recordá:
-    # - a, b dentro de [0, n-1]
-    # - si swap=True, primero hacé el intercambio en 'items'
-    # - cuando termines, devolvé {"done": True}
-    return {"done": True}
+
+def step(): 
+    global items, n, i, j, pivot, recorer, menores, mayores, pivot_lista
+    swap = False
+    if i < len(recorer): 
+     if recorer[i]>pivot:
+        mayores.append(recorer[i])
+        i += 1
+        {"a": recorer[j], "b": recorer[i], "swap": True, "done": False}
+     if recorer[i]<pivot:
+        menores.append(recorer[i])
+        j +=1
+        recorer[i],recorer[j] = recorer[j],recorer[i]
+        swap = True
+        i +=1
+        {"a": recorer[j], "b": recorer[i], "swap": True, "done": False}
+     if recorer[i] == pivot:
+        j += 1
+        recorer[i],recorer[j] = recorer[j],recorer[i]
+        pivot_lista.apppend(recorer[i])
+        swap = True 
+        i += 1
+        {"a": recorer[j], "b": recorer[i], "swap": True, "done": False}
+    else:
+        if len(mayores) > 2:
+            recorer = mayores
+        else:
+            recorer = menores
+        if len(mayores) < 2 and len(menores) < 2:
+           return {"done": True}
+        else:
+           mayores = []
+           menores = []
+    i = 0
+    j = 0
+    {"a": recorer[j], "b": recorer[i], "swap": True, "done": False}
