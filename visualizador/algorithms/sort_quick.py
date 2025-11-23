@@ -11,7 +11,7 @@ def init(vals):
     n = len(items)
     i = 0
     pivot = items[n-1]
-    j = i - 1
+    j = -1
     lista = items
     d = 0
     fase = 1
@@ -19,51 +19,57 @@ def init(vals):
 def step():
     global items, n, i, j, pivot, fase, lista, d
     if fase == 1:   
-        if i <= n-1:
+        if i <= n-1 - d:
             if items[i + d] < pivot:
              j += 1
              items[i + d], items[j + d] = items[j + d], items[i + d]
              swap = True
              i += 1
-             return {"a": j + d, "b": i - 1 + d, "swap": True, "done": False}    
+             return {"a": j  + d, "b": i - 1 + d, "swap": True, "done": False}    
             if items[i + d] == pivot:
                 j += 1
                 items[i + d], items[j + d] = items[j + d], items[i + d]
                 swap = True
                 i += 1
-                return {"a": j + d, "b": i - 1 + d, "swap": True, "done": False}
+                return {"a": j  + d, "b": i - 1 + d, "swap": True, "done": False}
             i += 1
             return {"a": j + d, "b": i - 1 + d, "swap": False, "done": False}
         else:
-          menores = items[d : j]
+          menores = items[d : d + j]
           i = 0
-          j = 0
-          pivot = menores[len(menores-1)]
+          j = i -1
+          pivot = menores[len(menores)-1]
           n = len(menores)
           fase = 2
     if fase == 2:
-          if i <= n-1:  
-             if items[i + d] > pivot: 
+          if i <= n-1 - d:  
+             if items[i + d] < pivot: 
+                j += 1
                 items[i + d], items[j + d] = items[j + d], items[i + d]
                 swap = True
                 i += 1
-                return {"a": j + d, "b": i - 1 + d, "swap": True, "done": False}
+                return {"a": j  + d, "b": i - 1 + d, "swap": True, "done": False}
              if items[i+d] == pivot:
                  j += 1
                  items[i + d], items[j + d] = items[j + d], items[i + d]
                  swap = True
                  i += 1
-                 return {"a": j + d, "b": i - 1 + d, "swap": True, "done": False}
+                 return {"a": j  + d, "b": i - 1 + d, "swap": True, "done": False}
              i +=1
-             return {"a": j + d, "b": i - 1 + d, "swap": False, "done": False}
+             return {"a": j  + d, "b": i - 1 + d, "swap": False, "done": False}
           else:
-                 menores = items[d : j]
+                 menores = items[d : j + d]
                  i = 0
-                 j = 0
-                 pivot = menores[len(menores-1)]
+                 j = i -1
+                 pivot = menores[len(menores)-1]
                  n = len(menores)
-                 fase = 2
-                 return {"a": j + d, "b": i - 1 + d, "swap": False, "done": False}
+                 if len(menores)<2:
+                    n = len(items)
+                    pivot = items[n-1]
+                    lista.pop(lista[0],lista[1])
+                    d = len(items) - len(lista)
+                    fase = 1
+                 return {"a": j -1 + d, "b": i - 1 + d, "swap": False, "done": False}
              
              
                 
