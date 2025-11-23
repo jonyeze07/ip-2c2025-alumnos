@@ -2,55 +2,75 @@ items = []
 n = 0
 i = 0
 j = 0
-pivot = items[n-1]
-recorer = items[:]
-menores = []
-pivot_lista = []
-mayores = []
+pivot =[]
+fase = 1
+d = 0
 def init(vals):
-    global items, n, i, j, pivot, recorer, menores, mayores, pivot_lista
+    global items, n, i, j, pivot, fase, lista, d   
     items = list(vals)
     n = len(items)
     i = 0
     pivot = items[n-1]
-    j = 0 
-    recorer = items[:]
-    menores = []
-    pivot_lista = []
-    mayores = []
+    j = i - 1
+    lista = items
+    d = 0
+    fase = 1
 
-def step(): 
-    global items, n, i, j, pivot, recorer, menores, mayores, pivot_lista
-    swap = False
-    if i < len(recorer): 
-     if recorer[i]>pivot:
-        mayores.append(recorer[i])
-        i += 1
-        {"a": recorer[j], "b": recorer[i], "swap": True, "done": False}
-     if recorer[i]<pivot:
-        menores.append(recorer[i])
-        j +=1
-        recorer[i],recorer[j] = recorer[j],recorer[i]
-        swap = True
-        i +=1
-        {"a": recorer[j], "b": recorer[i], "swap": True, "done": False}
-     if recorer[i] == pivot:
-        j += 1
-        recorer[i],recorer[j] = recorer[j],recorer[i]
-        pivot_lista.apppend(recorer[i])
-        swap = True 
-        i += 1
-        {"a": recorer[j], "b": recorer[i], "swap": True, "done": False}
-    else:
-        if len(mayores) > 2:
-            recorer = mayores
+def step():
+    global items, n, i, j, pivot, fase, lista, d
+    if fase == 1:   
+        if i <= n-1:
+            if items[i + d] < pivot:
+             j += 1
+             items[i + d], items[j + d] = items[j + d], items[i + d]
+             swap = True
+             i += 1
+             return {"a": j + d, "b": i - 1 + d, "swap": True, "done": False}    
+            if items[i + d] == pivot:
+                j += 1
+                items[i + d], items[j + d] = items[j + d], items[i + d]
+                swap = True
+                i += 1
+                return {"a": j + d, "b": i - 1 + d, "swap": True, "done": False}
+            i += 1
+            return {"a": j + d, "b": i - 1 + d, "swap": False, "done": False}
         else:
-            recorer = menores
-        if len(mayores) < 2 and len(menores) < 2:
-           return {"done": True}
-        else:
-           mayores = []
-           menores = []
-    i = 0
-    j = 0
-    {"a": recorer[j], "b": recorer[i], "swap": True, "done": False}
+          menores = items[d : j]
+          i = 0
+          j = 0
+          pivot = menores[len(menores-1)]
+          n = len(menores)
+          fase = 2
+    if fase == 2:
+          if i <= n-1:  
+             if items[i + d] > pivot: 
+                items[i + d], items[j + d] = items[j + d], items[i + d]
+                swap = True
+                i += 1
+                return {"a": j + d, "b": i - 1 + d, "swap": True, "done": False}
+             if items[i+d] == pivot:
+                 j += 1
+                 items[i + d], items[j + d] = items[j + d], items[i + d]
+                 swap = True
+                 i += 1
+                 return {"a": j + d, "b": i - 1 + d, "swap": True, "done": False}
+             i +=1
+             return {"a": j + d, "b": i - 1 + d, "swap": False, "done": False}
+          else:
+                 menores = items[d : j]
+                 i = 0
+                 j = 0
+                 pivot = menores[len(menores-1)]
+                 n = len(menores)
+                 fase = 2
+                 return {"a": j + d, "b": i - 1 + d, "swap": False, "done": False}
+             
+             
+                
+
+
+
+        
+
+            
+    

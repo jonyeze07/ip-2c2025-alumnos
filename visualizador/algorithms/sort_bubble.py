@@ -11,7 +11,6 @@ def init(vals):
     j = 0
 
 def step():
-
     global items, n, i, j
     swap = False
  
