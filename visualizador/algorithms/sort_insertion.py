@@ -40,8 +40,6 @@ def step():
        return {"done": True}
     a = 0
     b = 0
-    if j == None:
-       j = i
     if j > 0:
      a = j
      b = j - 1
@@ -51,8 +49,8 @@ def step():
        j -= 1
      else:
         i += 1 
-        j = None     
+        j = i    
     else:
         i += 1
-        j = None
+        j = i
     return {"a": a, "b": b, "swap": swap, "done": False}     
