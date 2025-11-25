@@ -15,19 +15,14 @@ def step():
     global items, n, i, j, reverse
     if reverse == 0:
         swap = False
-    
         a = j
         b = j + 1
-
         if n - i - 1 == 0:
             return {"done": True}        
-        
         if items[a] > items[b]:
             items[a], items[b] = items[b], items[a]
             swap = True
-        
         j += 1
-        
         if b == n - i - 1:
             j = 0
             i += 1
