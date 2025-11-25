@@ -29,9 +29,9 @@ def step():
        if d > 1:
           seguir = True
        if d/2 >= 1:
-        d = d//2
-        i = 0 
+        d = d//2 
     if seguir == True:
+        i = 0
         seguir = False
         return{"a": i-1, "b": i+d-1, "swap": False, "done": False}
     if seguir == False:       
@@ -52,8 +52,7 @@ def step():
        if d > 1:
           seguir = True
        if d/2 >= 1:
-        d = d//2
-        i = 0 
+        d = d//2 
     if seguir == True:
         i = 0
         seguir = False
