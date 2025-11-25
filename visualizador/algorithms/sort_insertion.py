@@ -21,9 +21,7 @@ def step():
     a = 0
     b = 0
     if j == None:
-       if items[i-1] > items[i - 1]:
-         items[i] , items[i-1] = items[i-1] , items[i-1]
-       j = i
+      j = i
     if j > 0:
      a = j
      b = j - 1
@@ -45,9 +43,7 @@ def step():
     a = 0
     b = 0
     if j == None:
-       if items[i-1] < items[i - 1]:
-         items[i] , items[i-1] = items[i-1] , items[i-1]
-       j = i
+      j = i
     if j > 0:
      a = j
      b = j - 1
