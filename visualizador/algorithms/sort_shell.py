@@ -19,23 +19,23 @@ def step():
     if i+d < n:
         if items[i] > items[i + d]:
             items[i], items[i + d] = items[i+d], items[i]
-            swap = True
+            swap = True 
             seguir = True
             i += 1
             return{"a": i-1, "b": i+d-1, "swap": True, "done": False}  
         i += 1
         return{"a": i-1, "b": i+d-1, "swap": False, "done": False}
     else:
+       if d > 1:
+          seguir = True
        if d/2 >= 1:
         d = d//2
         i = 0 
     if seguir == True:
-        i = 0
         seguir = False
         return{"a": i-1, "b": i+d-1, "swap": False, "done": False}
     if seguir == False:       
       return {"done": True}
-    seguir = False
     return{"a": i-1, "b": i+d-1, "swap": False, "done": False}
   else:
     swap = False 
@@ -49,6 +49,8 @@ def step():
         i += 1
         return{"a": i-1, "b": i+d-1, "swap": False, "done": False}
     else:
+       if d > 1:
+          seguir = True
        if d/2 >= 1:
         d = d//2
         i = 0 
@@ -58,5 +60,4 @@ def step():
         return{"a": i-1, "b": i+d-1, "swap": False, "done": False}
     if seguir == False:       
       return {"done": True}
-    seguir = False
     return{"a": i-1, "b": i+d-1, "swap": False, "done": False}
