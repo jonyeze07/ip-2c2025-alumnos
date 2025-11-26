@@ -1,4 +1,5 @@
 Trabajo Practico: Algoritmos de ordenamiento.<br>
+Algoritmos: Bubble, Insertion, Selection, Shell <br>
 Grupo 1<br>
 Integrantes:<br>
 Bautista Covas<br>
